@@ -1,0 +1,142 @@
+#include <iostream>
+#include <random>
+#include <ctime>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+    default_random_engine gen(time(NULL));
+
+    uniform_int_distribution<int> cwdist(1,16);   ///fifteen weeks
+    uniform_int_distribution<int> tdist(8, 19);  ///random non conf team
+    int S[20][20];///20 teams, for 16 weeks
+    for(int r=0; r<20; r++)
+    {
+        for(int c=0; c<20; c++)
+        {
+            if(r==c){S[r][c]=-1;}
+            else {S[r][c]=0;}
+        }
+    }
+
+///schedule is initialized
+int w;
+int row, col;
+bool cont=true;
+bool found=false;
+        for(int r=0; r<8; r++)
+        {
+            for(int c=0; c<8; c++)
+            {
+
+                    if(S[r][c]==0)
+                    {///find a new week number
+                    while(cont==true){
+                        found=false;
+                        w = cwdist(gen);
+                        cout<<"checking week: "<<w;
+                        cout<<" at grid "<<r<<", "<<c<<endl;
+
+
+                        ///row = my row r
+                        row = r;
+                        ///checking all columns to my left
+                        for( col=0; col<c; col++)
+                        {
+                           if(S[row][col]==w){found = true;}
+                        }
+                        ///check ALL rows above me in my column
+                        for(row=0; row<r; row++)
+                        {
+                            if (S[row][col]==w){found = true;}
+                        }
+                        ///if it was not found..then continue is false
+                        if(found == false){S[row][col]=w;
+                                           S[col][row]=w;
+
+                                           cont=false;}
+                    }
+
+
+                 }
+
+            cont=true;
+            }
+        }
+        cout<<"all 8 conference matches are set"<<endl;
+            for( row=0; row<8; row++)
+    {
+        for(col=0; col<16; col++)
+        {   if(row==col){cout<<setw(4)<<"*";}
+            else{cout<<setw(4)<<S[row][col];}
+        }
+        cout<<endl;
+    }
+        ///*******************************
+        int q;
+        cin>>q;
+        int team; int x;
+        for(int r = 0; r<8; r++)///conference teams only
+        { cont = true;
+            for(int ct =0; ct<8; ct++)  ///ct = count of opponents to be scheduled
+            {
+
+               while(cont)
+               { ///choose a random, unassigned team
+               team = tdist(gen);   ///team number 8 to 19
+               if(S[r][team]==0){cout<<"sched avail!"<<endl;
+                                 cont = false;}
+               }
+               cout<<"testing team in column "<<team<<" in row "<<r<<endl;
+
+
+
+               cont = true;
+               while(cont)
+               {        found=false;  ///no conflict found
+                        w = cwdist(gen);///generating a random week
+                        ///cout<<"checking row "<<r<<", column "<<team;
+                       /// cout<<" for week "<<w<<endl;
+
+
+                        ///checking all of MY columns
+                        for( col=0; col<20; col++)
+                        {
+                           if(S[r][col]==w){found = true;}///r = my row...
+                           ///cout<<"checking col: "<<col<<endl;
+                        }
+                        ///check ALL rows for selected team
+                        for(row=0; row<20; row++)
+                        {
+                           if (S[row][team]==w){found = true;}
+                        }
+                        ///if it was not found..then continue is false
+                        if(found == false){S[r][team]=w;
+                                           S[team][r]=w;
+                                           cont=false;
+                                           cout<<r<<" vs "<<team<<" for week "
+                                           <<w<<" accepted"<<endl;}
+                        else{cout<<"rejected"<<endl;}
+
+
+                    }
+
+                 cont=true;
+                 }
+
+
+            }
+
+        ///----------------------
+    for( row=0; row<8; row++)
+    {
+        for(col=0; col<20; col++)
+        {   if(row==col){cout<<setw(4)<<"*";}
+            else{if(col!=7){cout<<setw(4)<<S[row][col];}
+                 else{cout<<setw(4)<<S[row][col]<<"|";}}
+        }
+        cout<<endl;
+    }
+    return 0;
+}
