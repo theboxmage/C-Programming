@@ -29,84 +29,71 @@ int main()
 	while(input != "q" && input != "Q")
 	{
 		int FTEST = hold.getPlayerScore()+hold.getAIScore();
-		cout << iX*iX;
+		//cout << iX*iX;
 		if(FTEST != iX*iX)
 		{
-		if(flag)
-		{
-			if(input.length() < 4)
-			{
-			cout << "Sorry, try again. " << endl << endl;
-			hold.printer();
-			hold.printScore();
-			cout << endl;
-			}
-			else
-			{
-				bool test = hold.update(input, 'H');
-				if(!test)
+			if(flag)
+			{	
+				if(input.length() < 4)
 				{
-					cout << endl << "Try again:" << endl;
+					cout << "Sorry, try again. " << endl << endl;
 					hold.printer();
 					hold.printScore();
 					cout << endl;
 				}
 				else
 				{
-					hold.printer();
-					hold.printScore();
-					cout << endl;
-					hold.AIMove();
+					bool test = hold.update(input, 'H');
+					while(holdScore!=hold.getPlayerScore())
+					{
+						input = "";
+						holdScore=hold.getPlayerScore();
+						while(input.length() < 4)
+						{
+							hold.printer();
+							hold.printScore();
+							cout << endl;
+							cout << "Nice Score! Go again!";
+							getline(cin, input);
+
+						}
+						hold.update(input, 'H');
+					}
+					if(!test)
+					{
+						cout << endl << "Try again:" << endl;
+						hold.printer();
+						hold.printScore();
+						cout << endl;
+					
+					}
+					else
+					{
+						hold.printer();
+						hold.printScore();
+			
+						hold.AIMove();
+					}
+				}		
+				cout << endl;
+				if(hold.getPlayerScore()+hold.getAIScore() < iX*iX)
+				{
+					cout << "What two dots would you like to connect? (Q to quit) ";
+					getline(cin, input);
 				}
-			}
-			int x = i.at(0)-'0';
-
-			input = 'q';
-
-			cout << endl;
-			if(hold.getPlayerScore()+hold.getAIScore() < iX*iX)
+			}	
+			else
 			{
-				cout << "What two dots would you like to connect? (Q to quit) ";
-				getline(cin, input);
+				input = 'q';
 			}
-		}	
+		}
 		else
 		{
 			input = 'q';
 		}
-		if(holdScore != hold.getPlayerScore() && hold.getPlayerScore()+hold.getAIScore() < iX*iX)
-		{
-			flag == false;
-			if(input.length() < 4)
-			{
-			cout << "Sorry, try again. " << endl << endl;
-			hold.printer();
-			hold.printScore();
-			}
-			else
-			{
-				bool test = hold.update(input, 'H');
-				if(!test)
-				{
-					cout << "Sorry, try again." << endl;
-					hold.printer();
-					hold.printScore();
-				}
-				else
-				{
-					hold.printer();
-					hold.printScore();
-					holdScore = hold.getPlayerScore();
-					flag = true;
-				}
-			}
-		}
 	}
-	else
-	{
-		input = 'q';
-	}
-	}
+	
+	
 	hold.printer();
 	cout << endl;
 	cout << "\nFinal Score:" << endl << "  You: " << hold.getPlayerScore();
