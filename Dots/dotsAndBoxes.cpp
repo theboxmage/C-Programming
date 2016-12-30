@@ -29,7 +29,6 @@ int main()
 	while(input != "q" && input != "Q")
 	{
 		int FTEST = hold.getPlayerScore()+hold.getAIScore();
-		//cout << iX*iX;
 		if(FTEST != iX*iX)
 		{
 			if(flag)
@@ -46,8 +45,9 @@ int main()
 					bool test = hold.update(input, 'H');
 					while(holdScore!=hold.getPlayerScore())
 					{
-						input = "";
 						holdScore=hold.getPlayerScore();
+						
+						input = "";
 						while(input.length() < 4)
 						{
 							hold.printer();
@@ -57,7 +57,24 @@ int main()
 							getline(cin, input);
 
 						}
-						hold.update(input, 'H');
+						bool check=hold.update(input, 'H');
+						while(!check)
+						{
+							input = "";
+							while(input.length() < 4)
+							{
+								hold.printer();
+								hold.printScore();
+								cout << endl;
+								cout << "Nice Score! Go again!";
+								getline(cin, input);
+							}
+							check = hold.update(input, 'H');
+						}
+						if(FTEST!=iX*iX)
+						{
+							break;
+						}
 					}
 					if(!test)
 					{
