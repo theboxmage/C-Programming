@@ -46,18 +46,7 @@ int main()
 					while(holdScore!=hold.getPlayerScore())
 					{
 						holdScore=hold.getPlayerScore();
-						
-						input = "";
-						while(input.length() < 4)
-						{
-							hold.printer();
-							hold.printScore();
-							cout << endl;
-							cout << "Nice Score! Go again!";
-							getline(cin, input);
-
-						}
-						bool check=hold.update(input, 'H');
+					    bool check = false;
 						while(!check)
 						{
 							input = "";
