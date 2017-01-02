@@ -75,7 +75,10 @@ int main()
 	itr=items.begin();
 	while(itr!=items.end())
 	{
-		cout << itr->name<< endl;
+		if(itr->name!="")
+		{
+			cout << itr->name<< endl;	
+		}
 		itr++;
 	}
 
