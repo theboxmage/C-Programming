@@ -9,7 +9,11 @@
 #
 #######################################################################
 
+if [ -z "$1" ]; then
 du -sh * > /tmp/hold
+else
+du -sh $1/* > /tmp/hold
+fi
 g++ -o a ~/C++/SortBySize/driver.cpp
 ./a
 rm /tmp/hold
