@@ -10,6 +10,7 @@
 #######################################################################
 
 du -sh * > /tmp/hold
-g++ -o a driver.cpp
+g++ -o a ~/C++/SortBySize/driver.cpp
 ./a
 rm /tmp/hold
+rm a
