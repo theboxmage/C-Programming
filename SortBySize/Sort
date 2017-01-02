@@ -1,0 +1,15 @@
+#!/bin/bash
+#######################################################################
+#
+# This is a frontend to the local .cpp file titled driver.
+# These programs combined sort du -sh * output. 
+#
+# I didn't do it through standard output, so I have to create and 
+# delete a file.
+#
+#######################################################################
+
+du -sh * > /tmp/hold
+g++ -o a driver.cpp
+./a
+rm /tmp/hold
