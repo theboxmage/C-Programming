@@ -14,7 +14,7 @@ du -sh * > /tmp/hold
 else
 du -sh $1/* > /tmp/hold
 fi
-g++ -o a ~/C++/SortBySize/driver.cpp
+g++ -o a ~/C-Programming/SortBySize/driver.cpp
 ./a
 rm /tmp/hold
 rm a
