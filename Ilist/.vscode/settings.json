@@ -1,3 +1,7 @@
 {
-    "files.associations": {}
+    "files.associations": {
+        "*harray": "cpp",
+        "array": "cpp",
+        "*h*h*h*harray": "cpp"
+    }
 }
