@@ -16,6 +16,7 @@
         "*hcstdio": "cpp",
         "cstdio": "cpp",
         "cstdarg": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "algorithm": "cpp"
     }
 }

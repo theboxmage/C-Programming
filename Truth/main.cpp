@@ -67,10 +67,7 @@ bool run1(int x, string input)
 				count++;
 			}
 		}
-		//cout << input.substr(1, i-1) << endl;
-		//cout << input.substr(i+2) << endl;
-		//cout << input.at(i+1) << endl;
-		//cout << i;
+
 		if(input.length()-1 == i)
 		{
 			return run1(x, input.substr(1, i-1));;
@@ -89,6 +86,10 @@ bool run1(int x, string input)
 			{
 				return !run1(x, input.substr(1, i-1)) && run1(x, input.substr(i+3));
 			}
+			else if(input.at(i+2) == '^')
+			{
+				return !run1(x, input.substr(1, i-1)) ^ run1(x, input.substr(i+3));
+			}
 			else
 			{
 				cout << "ERROR: Output, unexpected symbol: " << input .at(i+1) << " Output may be skewed" << endl;
@@ -102,6 +103,10 @@ bool run1(int x, string input)
 		else if(input.at(i+1) == '*')
 		{
 			return run1(x, input.substr(1, i-1)) && run1(x, input.substr(i+2));
+		}
+		else if(input.at(i+1) == '^')
+		{
+			return run1(x, input.substr(1, i-1)) ^ run1(x, input.substr(i+2));
 		}
 		else
 		{
@@ -249,8 +254,9 @@ int main()
 	
 	eq.erase(std::remove(eq.begin(),eq.end(),' '),eq.end());
 
-	//cout << "Working with the input:\n" << eq << endl;
+	cout << "Working with the input:\n" << eq << endl;
 
 	fq(eq);
+	return 0;
 }
 

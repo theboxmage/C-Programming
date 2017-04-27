@@ -1,0 +1,7 @@
+createPolyhedra.o: createPolyhedra.cpp Polyhedron.h Point.h BoundingBox.h \
+ PolyhedronFactory.h
+Polyhedron.o: Polyhedron.cpp Polyhedron.h Point.h BoundingBox.h \
+ PolyhedronFactory.h
+Sphere.o: Sphere.cpp Sphere.h Polyhedron.h Point.h BoundingBox.h
+Composite.o: Composite.cpp Polyhedron.h Point.h BoundingBox.h Composite.h
+Point.o: Point.cpp Point.h
